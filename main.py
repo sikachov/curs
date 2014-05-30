@@ -12,6 +12,7 @@ cf = pylab.gcf()
 cf.set_facecolor('w')
 ax = pylab.gca()
 
+diam={}
 
 nodes = int(raw_input("Enter the count of nodes: "))
 
@@ -23,6 +24,8 @@ def draw(graph):
     xy = []
     k=0
     a=np.random.randint(len(diamet),size=nodes)
+    for i in a:
+        diam[i]=[]
     print a
     for i in xrange(len(graph)):
         x = np.random.random()
@@ -31,6 +34,11 @@ def draw(graph):
         node_collection = ax.scatter(x, y, s=diamet[a[k]], c='y', marker='o', zorder=2)
         k+=1
 
+        
+    for i in xrange(len(a)):
+        diam[a[i]].append(xy[i])
+    
+    print xy, "\n\n\n", diam
     graph1=list(graph)
     xy1=list(xy)
     pos = []
@@ -41,7 +49,7 @@ def draw(graph):
     while xy1:
         dist=100
         for i in xy1:
-           ''' k+=1
+            '''k+=1
             if k>=2:
                 if diamet'''
             x=i[0]
