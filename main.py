@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib
 
 graph = []
-diamet=[200,500,700,900]
+diamet=[200,400,700,1000]
 
 
 matplotlib.rcParams["toolbar"]="None"
@@ -23,9 +23,11 @@ for i in xrange(1,nodes+1):
 def draw(graph):
     xy = []
     k=0
-    a=np.random.randint(len(diamet),size=nodes)
-    for i in a:
-        diam[i]=[]
+    a1=np.random.randint(len(diamet),size=nodes)
+    a=[]
+    for i in a1:
+        a.append(i)
+    
     print a
     for i in xrange(len(graph)):
         x = np.random.random()
@@ -33,35 +35,71 @@ def draw(graph):
         xy.append([x, y])
         node_collection = ax.scatter(x, y, s=diamet[a[k]], c='y', marker='o', zorder=2)
         k+=1
-
-        
-    for i in xrange(len(a)):
-        diam[a[i]].append(xy[i])
     
-    print xy, "\n\n\n", diam
+    
+
     graph1=list(graph)
     xy1=list(xy)
     pos = []
     start=[-0.1,-0.1]
     mini=xy1[0]
     k=0
-    start=[-0.1,-0.1]
+    flag=1
+    i=-1
+    l1=[]
     while xy1:
         dist=100
-        for i in xy1:
-            '''k+=1
-            if k>=2:
-                if diamet'''
-            x=i[0]
-            y=i[1]
+        l=-1
+        le=len(xy1)-1
+        while i < le:
+            l+=1
+            i+=1
+            while i in l1:
+                i+=1
+            if i > le:
+                break
+            x=xy1[i][0]
+            y=xy1[i][1]
             rast=np.sqrt((x-start[0])**2+(y-start[0])**2)
             if rast<dist:
                 dist=rast
-                k=i
-        plt.plot([start[0], k[0]], [start[1], k[1]], 'k-', zorder=1)
-        start=k
-        xy1.remove(k)
-        
+                k=[xy1[i][0],xy1[i][1]]
+                m=i
+                d=a[i]
+        if start!=[-0.1,-0.1] or flag!=1:
+            if d1 in a:
+                if d==d1:
+                    plt.plot([start[0], k[0]], [start[1], k[1]], 'k-', zorder=1)
+                    start=k
+                    d1=d
+                    a[m]=10
+                    a.remove(10)
+                    xy1.remove(k)
+                    i=-1
+                    l1=[]
+                else:
+                    l1.append(m)
+                    i=-1
+            else:
+                plt.plot([start[0], k[0]], [start[1], k[1]], 'k-', zorder=1)
+                start=k
+                d1=d
+                a[m]=10
+                a.remove(10)
+                xy1.remove(k)
+                i=-1
+                l1=[]
+        else:
+            plt.plot([start[0], k[0]], [start[1], k[1]], 'k-', zorder=1)
+            start=k
+            d1=d
+            a[m]=10
+            a.remove(10)
+            xy1.remove(k)
+            flag=0
+            i=-1
+            l1=[]
+
     
     
     for i in graph:
