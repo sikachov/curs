@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib
 
 graph = []
-diamet=[200,400,700,1000]
+diamet=[200,450,700,1000]
 
 
 matplotlib.rcParams["toolbar"]="None"
@@ -13,8 +13,16 @@ cf.set_facecolor('w')
 ax = pylab.gca()
 
 diam={}
+while 1:
+    try:
+    	nodes = int(raw_input("Enter the count of nodes: "))
+        if nodes<1:
+            print 'Try again'
+        else:
+            break
+    except ValueError:
+        print "Enter the number"
 
-nodes = int(raw_input("Enter the count of nodes: "))
 
 for i in xrange(1,nodes+1):
     graph.append(i)
@@ -27,8 +35,7 @@ def draw(graph):
     a=[]
     for i in a1:
         a.append(i)
-    
-    print a
+
     for i in xrange(len(graph)):
         x = np.random.random()
         y = np.random.random()
